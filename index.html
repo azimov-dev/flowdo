@@ -1,342 +1,702 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="description" content="Flowdo — A beautifully designed task manager to organize your day with elegance and focus.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Flowdo — A beautifully designed task manager to organize your day with elegance and focus."
+    />
     <title>Flowdo — Beautiful Task Manager</title>
 
     <!-- PWA -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#6366f1">
-    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- iOS / Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Flowdo">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Flowdo" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="ambient-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
     </div>
 
     <div class="app-container">
-        <!-- Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#logoGrad1)" opacity="0.9"/>
-                            <path d="M2 17L12 22L22 17" stroke="url(#logoGrad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 12L12 17L22 12" stroke="url(#logoGrad2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <defs>
-                                <linearGradient id="logoGrad1" x1="2" y1="2" x2="22" y2="12">
-                                    <stop stop-color="#a78bfa"/>
-                                    <stop offset="1" stop-color="#6366f1"/>
-                                </linearGradient>
-                                <linearGradient id="logoGrad2" x1="2" y1="12" x2="22" y2="22">
-                                    <stop stop-color="#818cf8"/>
-                                    <stop offset="1" stop-color="#c084fc"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <span class="logo-text">Flowdo</span>
-                </div>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <div class="logo-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2L2 7L12 12L22 7L12 2Z"
+                  fill="url(#logoGrad1)"
+                  opacity="0.9"
+                />
+                <path
+                  d="M2 17L12 22L22 17"
+                  stroke="url(#logoGrad2)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M2 12L12 17L22 12"
+                  stroke="url(#logoGrad2)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <defs>
+                  <linearGradient id="logoGrad1" x1="2" y1="2" x2="22" y2="12">
+                    <stop stop-color="#a78bfa" />
+                    <stop offset="1" stop-color="#6366f1" />
+                  </linearGradient>
+                  <linearGradient id="logoGrad2" x1="2" y1="12" x2="22" y2="22">
+                    <stop stop-color="#818cf8" />
+                    <stop offset="1" stop-color="#c084fc" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
+            <span class="logo-text">Flowdo</span>
+          </div>
+        </div>
 
-            <nav class="sidebar-nav">
-                <button class="nav-item active" data-filter="all" id="nav-all">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+        <nav class="sidebar-nav">
+          <button class="nav-item active" data-filter="all" id="nav-all">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            <span>All Tasks</span>
+            <span class="nav-badge" id="badge-all">0</span>
+          </button>
+          <button class="nav-item" data-filter="today" id="nav-today">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span>Today</span>
+            <span class="nav-badge" id="badge-today">0</span>
+          </button>
+          <button class="nav-item" data-filter="important" id="nav-important">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+              />
+            </svg>
+            <span>Important</span>
+            <span class="nav-badge" id="badge-important">0</span>
+          </button>
+          <button class="nav-item" data-filter="completed" id="nav-completed">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <span>Completed</span>
+            <span class="nav-badge" id="badge-completed">0</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-categories">
+          <div class="categories-header">
+            <h3>Categories</h3>
+            <button class="btn-icon" id="add-category-btn" title="Add category">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          </div>
+          <div class="categories-list" id="categories-list">
+            <button class="category-item" data-category="personal">
+              <span class="category-dot" style="background: #6366f1"></span>
+              <span>Personal</span>
+            </button>
+            <button class="category-item" data-category="work">
+              <span class="category-dot" style="background: #f59e0b"></span>
+              <span>Work</span>
+            </button>
+            <button class="category-item" data-category="health">
+              <span class="category-dot" style="background: #10b981"></span>
+              <span>Health</span>
+            </button>
+            <button class="category-item" data-category="learning">
+              <span class="category-dot" style="background: #ec4899"></span>
+              <span>Learning</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="progress-card">
+            <div class="progress-info">
+              <span class="progress-label">Daily Progress</span>
+              <span class="progress-value" id="progress-value">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                id="progress-fill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <span class="progress-detail" id="progress-detail"
+              >0 of 0 tasks done</span
+            >
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <header class="main-header">
+          <div class="header-left">
+            <button class="btn-icon mobile-menu-btn" id="mobile-menu-btn">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+            <div>
+              <p class="greeting" id="greeting">Good evening</p>
+              <h1 class="page-title" id="page-title">All Tasks</h1>
+            </div>
+          </div>
+          <div class="header-right">
+            <div class="search-wrapper" id="search-wrapper">
+              <svg
+                class="search-icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input
+                type="text"
+                class="search-input"
+                id="search-input"
+                placeholder="Search tasks..."
+              />
+            </div>
+            <div class="notif-wrapper">
+              <button
+                class="btn-icon notif-toggle"
+                id="notif-toggle"
+                title="Notification settings"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg>
+                <span class="notif-dot" id="notif-dot"></span>
+              </button>
+              <div class="notif-panel" id="notif-panel">
+                <div class="notif-panel-header">
+                  <h3>Notifications</h3>
+                </div>
+                <div class="notif-panel-body">
+                  <div class="notif-setting-row">
+                    <div class="notif-setting-info">
+                      <span class="notif-setting-label">Nightly Reminder</span>
+                      <span class="notif-setting-desc"
+                        >Get reminded about pending tasks</span
+                      >
+                    </div>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="notif-enabled" />
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+                  <div class="notif-setting-row">
+                    <div class="notif-setting-info">
+                      <span class="notif-setting-label">Reminder Time</span>
+                      <span class="notif-setting-desc"
+                        >When to send the notification</span
+                      >
+                    </div>
+                    <input
+                      type="time"
+                      id="notif-time"
+                      class="notif-time-input"
+                      value="21:00"
+                    />
+                  </div>
+                  <div class="notif-status" id="notif-status">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="16" x2="12" y2="12" />
+                      <line x1="12" y1="8" x2="12.01" y2="8" />
                     </svg>
-                    <span>All Tasks</span>
-                    <span class="nav-badge" id="badge-all">0</span>
-                </button>
-                <button class="nav-item" data-filter="today" id="nav-today">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                    <span>Enable notifications to get nightly reminders</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="btn-icon theme-toggle"
+              id="theme-toggle"
+              title="Toggle theme"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="sun-icon"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="moon-icon"
+                style="display: none"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Add Task Section -->
+        <div class="add-task-section">
+          <div class="add-task-card" id="add-task-card">
+            <div class="add-task-main">
+              <button class="add-task-check">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
+              <input
+                type="text"
+                class="add-task-input"
+                id="add-task-input"
+                placeholder="Add a new task..."
+                autocomplete="off"
+              />
+            </div>
+            <div class="add-task-options" id="add-task-options">
+              <div class="task-options-row">
+                <div class="option-group">
+                  <button
+                    class="option-btn"
+                    id="option-date"
+                    title="Set due date"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
                     <span>Today</span>
-                    <span class="nav-badge" id="badge-today">0</span>
-                </button>
-                <button class="nav-item" data-filter="important" id="nav-important">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    <input
+                      type="date"
+                      id="task-date-input"
+                      class="hidden-date-input"
+                    />
+                  </button>
+                  <select
+                    class="option-select"
+                    id="option-category"
+                    title="Category"
+                  >
+                    <option value="">Category</option>
+                    <option value="personal">🟣 Personal</option>
+                    <option value="work">🟡 Work</option>
+                    <option value="health">🟢 Health</option>
+                    <option value="learning">🩷 Learning</option>
+                  </select>
+                  <button
+                    class="option-btn star-btn"
+                    id="option-important"
+                    title="Mark as important"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                      />
                     </svg>
-                    <span>Important</span>
-                    <span class="nav-badge" id="badge-important">0</span>
+                  </button>
+                </div>
+                <button
+                  class="add-task-submit"
+                  id="add-task-submit"
+                  title="Add task"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
                 </button>
-                <button class="nav-item" data-filter="completed" id="nav-completed">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-                    </svg>
-                    <span>Completed</span>
-                    <span class="nav-badge" id="badge-completed">0</span>
-                </button>
-            </nav>
-
-            <div class="sidebar-categories">
-                <div class="categories-header">
-                    <h3>Categories</h3>
-                    <button class="btn-icon" id="add-category-btn" title="Add category">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="categories-list" id="categories-list">
-                    <button class="category-item" data-category="personal">
-                        <span class="category-dot" style="background: #6366f1"></span>
-                        <span>Personal</span>
-                    </button>
-                    <button class="category-item" data-category="work">
-                        <span class="category-dot" style="background: #f59e0b"></span>
-                        <span>Work</span>
-                    </button>
-                    <button class="category-item" data-category="health">
-                        <span class="category-dot" style="background: #10b981"></span>
-                        <span>Health</span>
-                    </button>
-                    <button class="category-item" data-category="learning">
-                        <span class="category-dot" style="background: #ec4899"></span>
-                        <span>Learning</span>
-                    </button>
-                </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <div class="sidebar-footer">
-                <div class="progress-card">
-                    <div class="progress-info">
-                        <span class="progress-label">Daily Progress</span>
-                        <span class="progress-value" id="progress-value">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="progress-detail" id="progress-detail">0 of 0 tasks done</span>
-                </div>
+        <!-- Tasks List -->
+        <div class="tasks-section">
+          <div class="tasks-header">
+            <span class="tasks-count" id="tasks-count">0 tasks</span>
+            <div class="tasks-sort">
+              <button
+                class="sort-btn active"
+                data-sort="newest"
+                id="sort-newest"
+              >
+                Newest
+              </button>
+              <button class="sort-btn" data-sort="oldest" id="sort-oldest">
+                Oldest
+              </button>
+              <button class="sort-btn" data-sort="priority" id="sort-priority">
+                Priority
+              </button>
             </div>
-        </aside>
+          </div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <header class="main-header">
-                <div class="header-left">
-                    <button class="btn-icon mobile-menu-btn" id="mobile-menu-btn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
-                        </svg>
-                    </button>
-                    <div>
-                        <p class="greeting" id="greeting">Good evening</p>
-                        <h1 class="page-title" id="page-title">All Tasks</h1>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="search-wrapper" id="search-wrapper">
-                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                        </svg>
-                        <input type="text" class="search-input" id="search-input" placeholder="Search tasks...">
-                    </div>
-                    <div class="notif-wrapper">
-                        <button class="btn-icon notif-toggle" id="notif-toggle" title="Notification settings">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                            </svg>
-                            <span class="notif-dot" id="notif-dot"></span>
-                        </button>
-                        <div class="notif-panel" id="notif-panel">
-                            <div class="notif-panel-header">
-                                <h3>Notifications</h3>
-                            </div>
-                            <div class="notif-panel-body">
-                                <div class="notif-setting-row">
-                                    <div class="notif-setting-info">
-                                        <span class="notif-setting-label">Nightly Reminder</span>
-                                        <span class="notif-setting-desc">Get reminded about pending tasks</span>
-                                    </div>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" id="notif-enabled">
-                                        <span class="toggle-slider"></span>
-                                    </label>
-                                </div>
-                                <div class="notif-setting-row">
-                                    <div class="notif-setting-info">
-                                        <span class="notif-setting-label">Reminder Time</span>
-                                        <span class="notif-setting-desc">When to send the notification</span>
-                                    </div>
-                                    <input type="time" id="notif-time" class="notif-time-input" value="21:00">
-                                </div>
-                                <div class="notif-status" id="notif-status">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
-                                    </svg>
-                                    <span>Enable notifications to get nightly reminders</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn-icon theme-toggle" id="theme-toggle" title="Toggle theme">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon">
-                            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                        </svg>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon" style="display:none">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                        </svg>
-                    </button>
-                </div>
-            </header>
+          <div class="tasks-list" id="tasks-list">
+            <!-- Tasks will be dynamically inserted here -->
+          </div>
 
-            <!-- Add Task Section -->
-            <div class="add-task-section">
-                <div class="add-task-card" id="add-task-card">
-                    <div class="add-task-main">
-                        <button class="add-task-check">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                            </svg>
-                        </button>
-                        <input type="text" class="add-task-input" id="add-task-input" placeholder="Add a new task..." autocomplete="off">
-                    </div>
-                    <div class="add-task-options" id="add-task-options">
-                        <div class="task-options-row">
-                            <div class="option-group">
-                                <button class="option-btn" id="option-date" title="Set due date">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                    <span>Today</span>
-                                    <input type="date" id="task-date-input" class="hidden-date-input">
-                                </button>
-                                <select class="option-select" id="option-category" title="Category">
-                                    <option value="">Category</option>
-                                    <option value="personal">🟣 Personal</option>
-                                    <option value="work">🟡 Work</option>
-                                    <option value="health">🟢 Health</option>
-                                    <option value="learning">🩷 Learning</option>
-                                </select>
-                                <button class="option-btn star-btn" id="option-important" title="Mark as important">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                    </svg>
-                                </button>
-                            </div>
-                            <button class="add-task-submit" id="add-task-submit" title="Add task">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+          <div class="empty-state" id="empty-state" style="display: none">
+            <div class="empty-illustration">
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  fill="url(#emptyGrad1)"
+                  opacity="0.1"
+                />
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="35"
+                  fill="url(#emptyGrad1)"
+                  opacity="0.08"
+                />
+                <path
+                  d="M45 55L55 65L75 45"
+                  stroke="url(#emptyGrad2)"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.3"
+                />
+                <rect
+                  x="35"
+                  y="38"
+                  width="50"
+                  height="44"
+                  rx="8"
+                  stroke="url(#emptyGrad2)"
+                  stroke-width="2"
+                  opacity="0.2"
+                />
+                <line
+                  x1="45"
+                  y1="52"
+                  x2="75"
+                  y2="52"
+                  stroke="url(#emptyGrad2)"
+                  stroke-width="1.5"
+                  opacity="0.15"
+                />
+                <line
+                  x1="45"
+                  y1="60"
+                  x2="65"
+                  y2="60"
+                  stroke="url(#emptyGrad2)"
+                  stroke-width="1.5"
+                  opacity="0.15"
+                />
+                <line
+                  x1="45"
+                  y1="68"
+                  x2="70"
+                  y2="68"
+                  stroke="url(#emptyGrad2)"
+                  stroke-width="1.5"
+                  opacity="0.15"
+                />
+                <defs>
+                  <linearGradient
+                    id="emptyGrad1"
+                    x1="10"
+                    y1="10"
+                    x2="110"
+                    y2="110"
+                  >
+                    <stop stop-color="#818cf8" />
+                    <stop offset="1" stop-color="#c084fc" />
+                  </linearGradient>
+                  <linearGradient
+                    id="emptyGrad2"
+                    x1="35"
+                    y1="38"
+                    x2="85"
+                    y2="82"
+                  >
+                    <stop stop-color="#818cf8" />
+                    <stop offset="1" stop-color="#c084fc" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
-
-            <!-- Tasks List -->
-            <div class="tasks-section">
-                <div class="tasks-header">
-                    <span class="tasks-count" id="tasks-count">0 tasks</span>
-                    <div class="tasks-sort">
-                        <button class="sort-btn active" data-sort="newest" id="sort-newest">Newest</button>
-                        <button class="sort-btn" data-sort="oldest" id="sort-oldest">Oldest</button>
-                        <button class="sort-btn" data-sort="priority" id="sort-priority">Priority</button>
-                    </div>
-                </div>
-
-                <div class="tasks-list" id="tasks-list">
-                    <!-- Tasks will be dynamically inserted here -->
-                </div>
-
-                <div class="empty-state" id="empty-state" style="display: none;">
-                    <div class="empty-illustration">
-                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                            <circle cx="60" cy="60" r="50" fill="url(#emptyGrad1)" opacity="0.1"/>
-                            <circle cx="60" cy="60" r="35" fill="url(#emptyGrad1)" opacity="0.08"/>
-                            <path d="M45 55L55 65L75 45" stroke="url(#emptyGrad2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
-                            <rect x="35" y="38" width="50" height="44" rx="8" stroke="url(#emptyGrad2)" stroke-width="2" opacity="0.2"/>
-                            <line x1="45" y1="52" x2="75" y2="52" stroke="url(#emptyGrad2)" stroke-width="1.5" opacity="0.15"/>
-                            <line x1="45" y1="60" x2="65" y2="60" stroke="url(#emptyGrad2)" stroke-width="1.5" opacity="0.15"/>
-                            <line x1="45" y1="68" x2="70" y2="68" stroke="url(#emptyGrad2)" stroke-width="1.5" opacity="0.15"/>
-                            <defs>
-                                <linearGradient id="emptyGrad1" x1="10" y1="10" x2="110" y2="110">
-                                    <stop stop-color="#818cf8"/>
-                                    <stop offset="1" stop-color="#c084fc"/>
-                                </linearGradient>
-                                <linearGradient id="emptyGrad2" x1="35" y1="38" x2="85" y2="82">
-                                    <stop stop-color="#818cf8"/>
-                                    <stop offset="1" stop-color="#c084fc"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
-                    <h3 class="empty-title">No tasks yet</h3>
-                    <p class="empty-text">Add your first task to get started on your productive journey</p>
-                </div>
-            </div>
-        </main>
+            <h3 class="empty-title">No tasks yet</h3>
+            <p class="empty-text">
+              Add your first task to get started on your productive journey
+            </p>
+          </div>
+        </div>
+      </main>
     </div>
+
+    <!-- Notification Panel Backdrop (mobile bottom sheet) -->
+    <div class="notif-backdrop" id="notif-backdrop"></div>
 
     <!-- Task Detail Modal -->
     <div class="modal-overlay" id="modal-overlay">
-        <div class="modal" id="task-modal">
-            <div class="modal-header">
-                <h2>Edit Task</h2>
-                <button class="btn-icon modal-close" id="modal-close">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <input type="text" class="modal-task-title" id="modal-task-title" placeholder="Task title">
-                <textarea class="modal-task-notes" id="modal-task-notes" placeholder="Add notes..." rows="4"></textarea>
-                <div class="modal-options">
-                    <div class="modal-option">
-                        <label>Due Date</label>
-                        <input type="date" id="modal-date" class="modal-date-input">
-                    </div>
-                    <div class="modal-option">
-                        <label>Category</label>
-                        <select id="modal-category" class="modal-select">
-                            <option value="">None</option>
-                            <option value="personal">🟣 Personal</option>
-                            <option value="work">🟡 Work</option>
-                            <option value="health">🟢 Health</option>
-                            <option value="learning">🩷 Learning</option>
-                        </select>
-                    </div>
-                    <div class="modal-option">
-                        <label>Priority</label>
-                        <div class="priority-toggle">
-                            <button class="priority-btn" id="modal-important">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                                </svg>
-                                <span>Important</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="modal-delete">Delete Task</button>
-                <button class="btn-primary" id="modal-save">Save Changes</button>
-            </div>
+      <div class="modal" id="task-modal">
+        <div class="modal-header">
+          <h2>Edit Task</h2>
+          <button class="btn-icon modal-close" id="modal-close">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
+        <div class="modal-body">
+          <input
+            type="text"
+            class="modal-task-title"
+            id="modal-task-title"
+            placeholder="Task title"
+          />
+          <textarea
+            class="modal-task-notes"
+            id="modal-task-notes"
+            placeholder="Add notes..."
+            rows="4"
+          ></textarea>
+          <div class="modal-options">
+            <div class="modal-option">
+              <label>Due Date</label>
+              <input type="date" id="modal-date" class="modal-date-input" />
+            </div>
+            <div class="modal-option">
+              <label>Category</label>
+              <select id="modal-category" class="modal-select">
+                <option value="">None</option>
+                <option value="personal">🟣 Personal</option>
+                <option value="work">🟡 Work</option>
+                <option value="health">🟢 Health</option>
+                <option value="learning">🩷 Learning</option>
+              </select>
+            </div>
+            <div class="modal-option">
+              <label>Priority</label>
+              <div class="priority-toggle">
+                <button class="priority-btn" id="modal-important">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon
+                      points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                    />
+                  </svg>
+                  <span>Important</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" id="modal-delete">Delete Task</button>
+          <button class="btn-primary" id="modal-save">Save Changes</button>
+        </div>
+      </div>
     </div>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
