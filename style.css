@@ -97,6 +97,7 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  min-height: 100dvh;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -172,6 +173,7 @@ body {
   z-index: 1;
   display: flex;
   height: 100vh;
+  height: 100dvh;
   width: 100%;
 }
 
@@ -563,8 +565,8 @@ body {
 }
 
 .add-task-card:focus-within {
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-glow);
+  border-color: rgba(129, 140, 248, 0.4);
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.15);
 }
 
 .add-task-main {
@@ -1932,6 +1934,17 @@ body {
 .ios body {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+/* On iOS, don't lock body overflow so keyboard scrolling works */
+.ios body {
+  overflow: auto;
+}
+
+.ios .app-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
 }
 
 /* iOS input styling fixes */
