@@ -806,21 +806,14 @@
   }
 
   function openNotifPanel() {
+    if (notifBackdrop) notifBackdrop.classList.add("visible");
     notifPanel.classList.add("open");
-    // On mobile, show backdrop and lock scroll
-    if (window.innerWidth <= 768 && notifBackdrop) {
-      notifBackdrop.classList.add("visible");
-      document.body.classList.add("notif-panel-open");
-    }
   }
 
   function closeNotifPanel() {
     if (!isNotifPanelOpen()) return;
     notifPanel.classList.remove("open");
-    if (notifBackdrop) {
-      notifBackdrop.classList.remove("visible");
-    }
-    document.body.classList.remove("notif-panel-open");
+    if (notifBackdrop) notifBackdrop.classList.remove("visible");
   }
 
   notifToggleBtn.addEventListener("click", (e) => {

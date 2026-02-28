@@ -1373,26 +1373,39 @@ body {
 }
 
 .notif-panel {
-  position: absolute;
-  top: calc(100% + 12px);
+  position: fixed;
+  bottom: 0;
+  left: 0;
   right: 0;
-  width: 320px;
+  width: 100%;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   box-shadow: var(--shadow-lg);
-  opacity: 0;
   pointer-events: none;
-  transform: translateY(-8px) scale(0.97);
-  transition: all var(--transition-base);
-  z-index: 60;
+  transform: translateY(100%);
+  transition: transform var(--transition-base);
+  z-index: 61;
   overflow: hidden;
+  max-height: 80vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom, 16px);
 }
 
 .notif-panel.open {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.notif-panel-header::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 4px;
+  background: var(--border-hover);
+  border-radius: var(--radius-full);
+  margin: 0 auto 12px;
 }
 
 .notif-panel-header {
@@ -1713,39 +1726,6 @@ body {
     overflow-y: auto;
   }
 
-  .notif-panel {
-    position: fixed;
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    transform: translateY(100%);
-    opacity: 1;
-    pointer-events: none;
-    max-height: 70vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: env(safe-area-inset-bottom, 16px);
-    z-index: 61;
-  }
-
-  .notif-panel.open {
-    transform: translateY(0);
-    pointer-events: all;
-  }
-
-  .notif-panel-header::before {
-    content: "";
-    display: block;
-    width: 36px;
-    height: 4px;
-    background: var(--border-hover);
-    border-radius: var(--radius-full);
-    margin: 0 auto 12px;
-  }
-
   .notif-toast {
     left: 16px;
     right: 16px;
@@ -1952,12 +1932,6 @@ body {
 .ios body {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-}
-
-/* Lock body scroll when notification panel is open on mobile */
-body.notif-panel-open {
-  overflow: hidden !important;
-  touch-action: none;
 }
 
 /* iOS input styling fixes */

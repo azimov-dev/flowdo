@@ -286,56 +286,6 @@
                 </svg>
                 <span class="notif-dot" id="notif-dot"></span>
               </button>
-              <div class="notif-panel" id="notif-panel">
-                <div class="notif-panel-header">
-                  <h3>Notifications</h3>
-                </div>
-                <div class="notif-panel-body">
-                  <div class="notif-setting-row">
-                    <div class="notif-setting-info">
-                      <span class="notif-setting-label">Nightly Reminder</span>
-                      <span class="notif-setting-desc"
-                        >Get reminded about pending tasks</span
-                      >
-                    </div>
-                    <label class="toggle-switch">
-                      <input type="checkbox" id="notif-enabled" />
-                      <span class="toggle-slider"></span>
-                    </label>
-                  </div>
-                  <div class="notif-setting-row">
-                    <div class="notif-setting-info">
-                      <span class="notif-setting-label">Reminder Time</span>
-                      <span class="notif-setting-desc"
-                        >When to send the notification</span
-                      >
-                    </div>
-                    <input
-                      type="time"
-                      id="notif-time"
-                      class="notif-time-input"
-                      value="21:00"
-                    />
-                  </div>
-                  <div class="notif-status" id="notif-status">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <line x1="12" y1="16" x2="12" y2="12" />
-                      <line x1="12" y1="8" x2="12.01" y2="8" />
-                    </svg>
-                    <span>Enable notifications to get nightly reminders</span>
-                  </div>
-                </div>
-              </div>
             </div>
             <button
               class="btn-icon theme-toggle"
@@ -614,8 +564,58 @@
       </main>
     </div>
 
-    <!-- Notification Panel Backdrop (mobile bottom sheet) -->
+    <!-- Notification Panel (body-level for proper fixed positioning on iOS) -->
     <div class="notif-backdrop" id="notif-backdrop"></div>
+    <div class="notif-panel" id="notif-panel">
+      <div class="notif-panel-header">
+        <h3>Notifications</h3>
+      </div>
+      <div class="notif-panel-body">
+        <div class="notif-setting-row">
+          <div class="notif-setting-info">
+            <span class="notif-setting-label">Nightly Reminder</span>
+            <span class="notif-setting-desc"
+              >Get reminded about pending tasks</span
+            >
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="notif-enabled" />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="notif-setting-row">
+          <div class="notif-setting-info">
+            <span class="notif-setting-label">Reminder Time</span>
+            <span class="notif-setting-desc"
+              >When to send the notification</span
+            >
+          </div>
+          <input
+            type="time"
+            id="notif-time"
+            class="notif-time-input"
+            value="21:00"
+          />
+        </div>
+        <div class="notif-status" id="notif-status">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="16" x2="12" y2="12" />
+            <line x1="12" y1="8" x2="12.01" y2="8" />
+          </svg>
+          <span>Enable notifications to get nightly reminders</span>
+        </div>
+      </div>
+    </div>
 
     <!-- Task Detail Modal -->
     <div class="modal-overlay" id="modal-overlay">
