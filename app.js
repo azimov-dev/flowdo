@@ -47,6 +47,62 @@
   const mobileMenuBtn = $("#mobile-menu-btn");
   const sidebar = $("#sidebar");
 
+  // ── IndexedDB sync (for service worker background notifications) ──
+  const DB_NAME = "flowdo-db";
+  const DB_VERSION = 1;
+
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains("settings")) {
+          db.createObjectStore("settings", { keyPath: "key" });
+        }
+        if (!db.objectStoreNames.contains("tasks")) {
+          db.createObjectStore("tasks", { keyPath: "id" });
+        }
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  function dbPut(storeName, key, value) {
+    return openDB()
+      .then(
+        (db) =>
+          new Promise((resolve, reject) => {
+            const tx = db.transaction(storeName, "readwrite");
+            const store = tx.objectStore(storeName);
+            store.put({ key, value });
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+          }),
+      )
+      .catch((err) => console.warn("DB write failed:", err));
+  }
+
+  function syncTasksToDB() {
+    openDB()
+      .then((db) => {
+        const tx = db.transaction("tasks", "readwrite");
+        const store = tx.objectStore("tasks");
+        store.clear();
+        tasks.forEach((t) => store.put(t));
+      })
+      .catch((err) => console.warn("Task sync failed:", err));
+  }
+
+  function syncNotifSettingsToDB() {
+    const settings = getNotifSettings();
+    dbPut("settings", "notif-settings", settings);
+    // Tell SW to start checking
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "SYNC_SETTINGS" });
+    }
+  }
+
   // ── Helpers ─────────────────────────────────────────
   function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -54,6 +110,7 @@
 
   function saveTasks() {
     localStorage.setItem("flowdo-tasks", JSON.stringify(tasks));
+    syncTasksToDB();
   }
 
   function getTodayString() {
@@ -585,6 +642,7 @@
 
   function saveNotifSettings() {
     localStorage.setItem("flowdo-notif", JSON.stringify(notifSettings));
+    syncNotifSettingsToDB();
   }
 
   function getNotifSettings() {
@@ -600,6 +658,10 @@
     notifEnabled.checked = settings.enabled;
     notifTimeInput.value = settings.time;
     updateNotifUI();
+
+    // Sync current state to IndexedDB for the service worker
+    syncNotifSettingsToDB();
+    syncTasksToDB();
 
     if (settings.enabled) {
       startNotifScheduler();
