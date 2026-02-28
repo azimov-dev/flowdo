@@ -800,34 +800,32 @@
 
   // Notification panel toggle
   const notifBackdrop = $("#notif-backdrop");
-  let savedScrollY = 0;
+
+  function isNotifPanelOpen() {
+    return notifPanel.classList.contains("open");
+  }
 
   function openNotifPanel() {
     notifPanel.classList.add("open");
     // On mobile, show backdrop and lock scroll
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 768 && notifBackdrop) {
       notifBackdrop.classList.add("visible");
-      savedScrollY = window.scrollY;
       document.body.classList.add("notif-panel-open");
-      document.body.style.top = `-${savedScrollY}px`;
     }
   }
 
   function closeNotifPanel() {
+    if (!isNotifPanelOpen()) return;
     notifPanel.classList.remove("open");
     if (notifBackdrop) {
       notifBackdrop.classList.remove("visible");
     }
-    if (document.body.classList.contains("notif-panel-open")) {
-      document.body.classList.remove("notif-panel-open");
-      document.body.style.top = "";
-      window.scrollTo(0, savedScrollY);
-    }
+    document.body.classList.remove("notif-panel-open");
   }
 
   notifToggleBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    if (notifPanel.classList.contains("open")) {
+    if (isNotifPanelOpen()) {
       closeNotifPanel();
     } else {
       openNotifPanel();
@@ -836,13 +834,19 @@
 
   // Close notif panel on backdrop tap
   if (notifBackdrop) {
-    notifBackdrop.addEventListener("click", () => {
+    notifBackdrop.addEventListener("click", (e) => {
+      e.stopPropagation();
       closeNotifPanel();
     });
   }
 
+  // Prevent clicks inside the panel from closing it
+  notifPanel.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
   document.addEventListener("click", (e) => {
-    if (!notifPanel.contains(e.target) && !notifToggleBtn.contains(e.target)) {
+    if (isNotifPanelOpen() && !notifToggleBtn.contains(e.target)) {
       closeNotifPanel();
     }
   });

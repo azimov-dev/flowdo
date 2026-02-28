@@ -1881,20 +1881,18 @@ body {
 
 /* Notification panel backdrop overlay (mobile bottom sheet) */
 .notif-backdrop {
-  display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   z-index: 59;
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--transition-base);
 }
 
 .notif-backdrop.visible {
-  display: block;
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* ---------- Selection ---------- */
@@ -1959,9 +1957,7 @@ body {
 /* Lock body scroll when notification panel is open on mobile */
 body.notif-panel-open {
   overflow: hidden !important;
-  position: fixed;
-  width: 100%;
-  height: 100%;
+  touch-action: none;
 }
 
 /* iOS input styling fixes */
